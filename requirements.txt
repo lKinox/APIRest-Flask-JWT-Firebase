@@ -1,0 +1,4 @@
+# Usage: pip install -r requirements.txt
+
+Flask==3.0.3
+firebase-admin==6.5.0
