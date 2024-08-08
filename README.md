@@ -20,7 +20,7 @@ Esta API REST, construida con Flask y protegida con JWT (JSON Web Tokens), usa c
 
 1. Clona este repositorio:
 ```
-git clone https://tu-repositorio.git](https://github.com/lKinox/APIRest-Flask-JWT-Firebase.git
+git clone https://github.com/lKinox/APIRest-Flask-JWT-Firebase.git
 ```
 2. Crea y activa un entorno virtual
 ```
