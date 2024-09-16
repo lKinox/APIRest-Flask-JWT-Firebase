@@ -77,10 +77,8 @@ pip install -r requirements.txt
 * /login (POST)
   - Cuerpo:
     ```json
-    {
-      "username": "Example",
-      "password": "example123"
-    }
+    "username": "Example",
+    "password": "example123"
     ```
   - Respuesta:
     ```json
@@ -113,9 +111,7 @@ pip install -r requirements.txt
 * /user (PUT)
   - Headers:
     ```
-    {
-      Authorization <JWT TOKEN>
-    }
+    Authorization <JWT TOKEN>
     ```
   - Cuerpo:
     ```json
@@ -146,9 +142,7 @@ pip install -r requirements.txt
 * /user (DELETE)
   - Headers:
     ```
-    {
-      Authorization <JWT TOKEN>
-    }
+    Authorization <JWT TOKEN>
     ```
   - Respuesta:
     ```json
