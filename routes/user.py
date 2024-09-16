@@ -1,18 +1,14 @@
-from flask import Blueprint, request, jsonify, session, current_app
-from routes.login import token_required
-from models import Update, Delete, Authenticate
+from flask import Blueprint, request, jsonify
+from routes.models import Update, Delete, Authenticate
 import jwt
-from functions.functions import generate_token_jwt
+from functions.functions import generate_token_jwt, token_required
 
 user_blueprint = Blueprint('user', __name__)
 
 @user_blueprint.route("/user", methods=["GET"])
 @token_required
-def get_user_profile():
-    token = session.get('token_jwt')
-
+def get_user_profile(payload):
     try:
-        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
         username = payload["username"]
 
         user_info = Authenticate.get_user(username)
@@ -25,10 +21,10 @@ def get_user_profile():
                 "ID": id,
                 "Created At": created_at
             }
-            return jsonify(response), 200
+            return jsonify(response)
         else:
             response = {"Mensaje": "Hubo un error encontrando su usuario"}
-            return jsonify(response), 401
+            return jsonify(response)
 
     except jwt.ExpiredSignatureError:
         return jsonify({'error': 'Token has expired'}), 401
@@ -40,11 +36,9 @@ def get_user_profile():
 
 @user_blueprint.route("/user", methods=["PUT"])
 @token_required
-def update_user_profile():
-    token = session.get('token_jwt')
+def update_user_profile(payload):
 
     try:
-        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
         username = payload["username"]
 
         new_username = request.json["username"]
@@ -57,42 +51,36 @@ def update_user_profile():
 
         if user:
             token_jwt = generate_token_jwt(user)
-            session['token_jwt'] = token_jwt
             return jsonify({'Token': token_jwt, 'Nuevo Usuario': user.username, 'Nuevo Email': user.email})
         else:
             response = {"error": "Credenciales inválidas"}
-            return jsonify(response), 401
+            return jsonify(response)
 
     except jwt.ExpiredSignatureError:
-        return jsonify({'error': 'Token has expired'}), 401
+        return jsonify({'error': 'Token has expired'})
     except jwt.InvalidTokenError:
-        return jsonify({'error': 'Invalid token'}), 401
+        return jsonify({'error': 'Invalid token'})
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)})
 
 
 @user_blueprint.route("/user", methods=["DELETE"])
 @token_required
-def delete_user():
-    token = session.get('token_jwt')
+def delete_user(payload):
 
     try:
-        payload = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
         username = payload["username"]
 
         delete = Delete.delete_user(username)
 
         if isinstance(delete, dict) and 'error' in delete:
-            return jsonify(delete), 400
+            return jsonify(delete)
 
-        if delete:
-            session.clear()
-            response = {"Mensaje": "Usuario eliminado correctamente"}
-            return jsonify(response), 200
+        return jsonify({"Mensaje": "Usuario eliminado correctamente"})
 
     except jwt.ExpiredSignatureError:
-        return jsonify({'error': 'Token has expired'}), 401
+        return jsonify({'error': 'Token has expired'})
     except jwt.InvalidTokenError:
-        return jsonify({'error': 'Invalid token'}), 401
+        return jsonify({'error': 'Invalid token'})
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': str(e)})

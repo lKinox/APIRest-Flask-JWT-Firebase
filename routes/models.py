@@ -3,7 +3,7 @@ from firebase_admin import credentials, firestore
 import hashlib
 import uuid
 
-cred = credentials.Certificate("./serviceAccountKey.json")
+cred = credentials.Certificate("./routes/serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()

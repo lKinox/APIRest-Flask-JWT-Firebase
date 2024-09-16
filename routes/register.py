@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models import User
+from routes.models import User
 from datetime import datetime
 from functions.functions import generate_hash_password
 
