@@ -95,7 +95,12 @@ pip install -r requirements.txt
     }
     ```
 * /user (GET)
-  - Headers: Authorization <JWT TOKEN>
+  - Headers:
+    ```
+    {
+      Authorization <JWT TOKEN>
+    }
+    ```
   - Respuesta:
     ```json
     {
@@ -106,7 +111,12 @@ pip install -r requirements.txt
     }
     ```
 * /user (PUT)
-  - Headers: Authorization <JWT TOKEN>
+  - Headers:
+    ```
+    {
+      Authorization <JWT TOKEN>
+    }
+    ```
   - Cuerpo:
     ```json
     {
@@ -134,7 +144,12 @@ pip install -r requirements.txt
     }
     ```
 * /user (DELETE)
-  - Headers: Authorization <JWT TOKEN>
+  - Headers:
+    ```
+    {
+      Authorization <JWT TOKEN>
+    }
+    ```
   - Respuesta:
     ```json
     {
