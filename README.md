@@ -85,7 +85,7 @@ pip install -r requirements.txt
   - Respuesta:
     ```json
     {
-      "mensaje": "El usuario fue autenticado satisfactoriamente"
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhmOTUzZDk5LWVmNzAtNDczYi04YTE0LWMwMjQ5NDU0NDkyNiIsInVzZXJuYW1lIjoiRXhhbXBsZSIsImV4cCI6MTcyNjY2ODExOX0.CNXLzDOb77_cMC0CLz42LRGEW1gxJe5w0wu4X4TLISg"
     }
     ```
     En caso de que el username o el password sean incorrectos
